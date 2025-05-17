@@ -243,7 +243,7 @@ body {
   text-decoration: underline;
 }
 
-/* Адаптивность */
+
 @media (max-width: 900px) {
   .intro {
     flex-direction: column;
