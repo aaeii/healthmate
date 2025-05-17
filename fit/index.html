@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+  <!-- ================= HEADER ================= -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">FitTrack</a>
+
+      <nav class="nav" id="navigation">
+        <a class="nav__link active" href="index.html">Главная</a>
+        <a class="nav__link" href="nutrition.html">Питание</a>
+        <a class="nav__link" href="habits.html">Трекер&nbsp;привычек</a>
+      </nav>
+
+      <!-- Burger menu (mobile) -->
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ================= MAIN ================= -->
+  <main>
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="container hero__wrapper">
+        <img class="hero__img" src="img/image1.png" />
+        <h1 class="hero__title">
+          Ваше тело — это дом вашей<br />души. Заботьтесь о нём!
+        </h1>
+      </div>
+    </section>
+
+    <!-- Intro text + diagram -->
+    <section class="intro container">
+      <div class="intro__text">
+        <p>
+          Мы здесь, чтобы помочь вам ввести новые привычки в вашу жизнь, следить
+          за питанием и улучшить общее качество жизни. Наша команда предлагает
+          полезные советы, ресурсы и поддержку для тех, кто хочет стать здоровее
+          и более энергичными.
+        </p>
+        <p>
+          Присоединяйтесь к нам и начните свой путь к здоровью уже сегодня!
+        </p>
+      </div>
+      <div class="intro__diagram">
+        <img src="img/2025-05-17_11-34-25.png"  />
+      </div>
+    </section>
+
+    <!-- Features block -->
+    <section class="features">
+      <div class="container">
+        <h2 class="section-title">
+          Мы стремимся сделать вашу жизнь <span>лучше!</span>
+        </h2>
+
+        <div class="features__grid">
+          <div class="feature">
+            <img class="feature__icon" src="img/Sun.png" aria-hidden="true" alt="" />
+            <p class="feature__text">
+              На нашем сайте вы найдёте множество советов, которые помогут вам
+              лучше понять, как заботиться о своём здоровье
+            </p>
+          </div>
+
+          <div class="feature">
+            <img class="feature__icon" src="img/Instacart.png" aria-hidden="true" />
+            <p class="feature__text">
+              С нами вы сможете не только следить за своим питанием, но и улучшать
+              общее состояние здоровья
+            </p>
+          </div>
+
+          <div class="feature">
+            <img class="feature__icon" src="img/Southwest Airlines.png" aria-hidden="true" alt="" />
+            <p class="feature__text">
+              Мы предоставляем практические советы и стратегии для внедрения
+              здоровых привычек в повседневную жизнь
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cards / Call‑to‑action -->
+    <section class="cards container">
+      <h2 class="section-title cards__title">
+        От слов — <span>к делу</span>
+      </h2>
+
+      <div class="cards__grid">
+        <!-- Card #1 -->
+        <article class="card">
+          <img class="card__img" src="img/image2.png" />
+
+          <div class="card__content">
+            <h3 class="card__title">Питание</h3>
+            <p class="card__text">
+              Здесь вы найдёте ценные советы по правильному питанию, которые
+              помогут вам достичь ваших целей в области здоровья. Вы сможете легко
+              рассчитать свою суточную норму калорий, белков, жиров и углеводов
+              (БЖУ), чтобы создать идеальный рацион, соответствующий вашим
+              потребностям. Начните свой путь к здоровью с правильного питания!
+            </p>
+            <a class="btn" href="#">Начать</a>
+          </div>
+        </article>
+
+        <!-- Card #2 -->
+        <article class="card">
+          <img class="card__img" src="img/image3.png" alt="Девушка медитирует" />
+
+          <div class="card__content">
+            <h3 class="card__title">Привычки</h3>
+            <p class="card__text">
+              Ваша жизнь — это совокупность привычек. Здесь вы можете отслеживать
+              и управлять своими привычками, создавая здоровые рутинные действия,
+              которые приведут к положительным изменениям. Удобный интерфейс
+              поможет вам легко фиксировать прогресс и мотивировать себя.
+              Начните формировать свои лучшие привычки сегодня!
+            </p>
+            <a class="btn" href="#">Начать</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Связаться с нами:</span>
+      <a href="mailto:fittrack@gmail.com">fittrack@gmail.com</a>
+      <a href="tel:+79999999999">+7 999 99 99 999</a>
+    </div>
+  </footer>
+
+  <!-- Simple burger script (optional) -->
+  <script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('navigation');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('burger--active');
+      nav.classList.toggle('nav--open');
+    });
+  </script>
+</body>
+</html>
