@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,13 +10,13 @@
 
 
   <style>
-
     .page-title {
       font-size: 1.75rem;
       font-weight: 600;
       margin: 2rem 0 2.5rem;
       position: relative;
     }
+
     .page-title::after {
       content: "";
       position: absolute;
@@ -27,7 +28,7 @@
       transform: translateY(-50%);
     }
 
- 
+
     .plate {
       display: grid;
       grid-template-columns: 1fr 280px 1fr;
@@ -35,24 +36,28 @@
       align-items: center;
       margin-bottom: 4rem;
     }
+
     .plate__img {
       width: 100%;
       max-width: 120px;
       border-radius: 1rem;
     }
+
     .plate__label {
       text-align: center;
       font-size: 0.85rem;
       margin-top: 0.5rem;
     }
+
     .plate__diagram {
       justify-self: center;
     }
+
     .plate__diagram img {
       width: 280px;
     }
 
-  
+
     .nutri-step {
       display: grid;
       grid-template-columns: 48px 1fr;
@@ -60,6 +65,7 @@
       margin-bottom: 3rem;
       align-items: flex-start;
     }
+
     .nutri-step__num {
       width: 48px;
       height: 48px;
@@ -70,16 +76,19 @@
       justify-content: center;
       font-weight: 600;
     }
+
     .nutri-step__body h3 {
       margin: 0 0 0.75rem;
       font-size: 1rem;
       text-transform: uppercase;
       font-weight: 700;
     }
+
     .nutri-step__body p {
       margin: 0.25rem 0;
       font-size: 0.9rem;
     }
+
     .callout {
       display: inline-block;
       background: #bfa37e;
@@ -99,25 +108,30 @@
       max-width: 700px;
       margin: 0 auto 4rem;
     }
+
     .calc h2 {
       font-size: 1.5rem;
       margin: 0 0 1.25rem;
       text-align: center;
     }
+
     .calc small {
       display: block;
       font-size: 0.75rem;
       margin-bottom: 1.5rem;
       text-align: center;
     }
+
     .calc form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
     }
+
     .calc label {
       font-size: 0.85rem;
     }
+
     .calc input,
     .calc select {
       width: 100%;
@@ -127,11 +141,13 @@
       font-family: inherit;
       font-size: 0.9rem;
     }
+
     .calc .radio-group {
       display: flex;
       gap: 1.5rem;
       margin-bottom: 1rem;
     }
+
     .calc .btn {
       align-self: center;
       background: #c7a382;
@@ -146,6 +162,7 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+
       .plate__diagram {
         order: -1;
         margin-bottom: 2rem;
@@ -153,6 +170,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <header class="header">
@@ -174,17 +192,23 @@
   <main class="container">
 
     <h1 class="page-title">Основы здорового питания</h1>
-      <div class="full-width-image">
-    <img src="img/2025-05-17_14-10-37.png" alt="Принципы здоровой тарелки" />
+    <div class="full-width-image">
+      <img src="img/2025-05-17_14-10-37.png" alt="Принципы здоровой тарелки" />
     </div>
 
     <section class="nutri-step">
       <div class="nutri-step__num">1</div>
       <div class="nutri-step__body">
         <h3>Белки</h3>
-        <p><strong>Белки</strong> — это важнейшие компоненты пищи. Белки растительного и животного происхождения должны присутствовать в пищe в равных пропорциях, приблизительно 30–40 % одних и столько же других.</p>
-        <p><em>Животные белки</em> (мясо, рыба, творог, яйца, сыр) содержат в своём составе около 20 % чистого белка. Суточная норма таких продуктов должна составлять до 150-200 г. Красное мясо (баранину, говядину, свинину) не рекомендуют употреблять чаще двух раз в неделю, лучше заменить его курицей, индейкой (без кожи), а ещё лучше — рыбой.</p>
-        <p><em>Растительные белки</em> (продукты переработки зерна, крупы, бобовые, грибы, семена подсолнечника и тыквы и орехи). В день съедать 1 порцию этих продуктов: можно приготовить самостоятельное блюдо или же добавить их в любое другое (салат, омлет, овощной гарнир, суп и др.).</p>
+        <p><strong>Белки</strong> — это важнейшие компоненты пищи. Белки растительного и животного происхождения должны
+          присутствовать в пищe в равных пропорциях, приблизительно 30–40 % одних и столько же других.</p>
+        <p><em>Животные белки</em> (мясо, рыба, творог, яйца, сыр) содержат в своём составе около 20 % чистого белка.
+          Суточная норма таких продуктов должна составлять до 150-200 г. Красное мясо (баранину, говядину, свинину) не
+          рекомендуют употреблять чаще двух раз в неделю, лучше заменить его курицей, индейкой (без кожи), а ещё лучше —
+          рыбой.</p>
+        <p><em>Растительные белки</em> (продукты переработки зерна, крупы, бобовые, грибы, семена подсолнечника и тыквы
+          и орехи). В день съедать 1 порцию этих продуктов: можно приготовить самостоятельное блюдо или же добавить их в
+          любое другое (салат, омлет, овощной гарнир, суп и др.).</p>
       </div>
     </section>
 
@@ -192,9 +216,11 @@
       <div class="nutri-step__num">2</div>
       <div class="nutri-step__body">
         <h3>Углеводы</h3>
-        <p><strong>Углеводы</strong> — снабжают организм человека энергией. Подразделяются белки на простые и сложные. Их требуется нашему организму больше всего, так как они служат основным источником энергии.</p>
+        <p><strong>Углеводы</strong> — снабжают организм человека энергией. Подразделяются белки на простые и сложные.
+          Их требуется нашему организму больше всего, так как они служат основным источником энергии.</p>
         <p>Простые углеводы (сахар, сладости и напитки на его основе), требуется не более 50 г в сутки.</p>
-        <p>Сложные углеводы присутствуют в крахмалосодержащих продуктах (хлеб, каши, макаронные изделия, а также овощи и фрукты). Здоровому человеку углеводов нужно потреблять — 350 г в сутки.</p>
+        <p>Сложные углеводы присутствуют в крахмалосодержащих продуктах (хлеб, каши, макаронные изделия, а также овощи и
+          фрукты). Здоровому человеку углеводов нужно потреблять — 350 г в сутки.</p>
       </div>
     </section>
 
@@ -202,11 +228,17 @@
       <div class="nutri-step__num">3</div>
       <div class="nutri-step__body">
         <h3>Жиры</h3>
-        <p><strong>Жиры</strong> обладают высокой энергетической ценностью. Они более чем в 2 раза выше энергетической ценности белков и углеводов, а значит, содержащие жир продукты являются наиболее калорийными.</p>
-        <p><em>Животные жиры</em> (насыщенные), высокое их потребление приводит к ожирению, сахарному диабету и сердечно-сосудистым заболеваниям. Рекомендуется ограничение потребления жирного мяса, сливочного масла, а также исключение мясоколбасных продуктов (сосиски, сардельки, колбасы, карбонаты и т.д.) и субпродуктов (печень, язык и др.).</p>
-        <p><em>Растительные жиры</em> (ненасыщенные) поступают в организм вместе с маслами растительного происхождения — оливковым, соевым, подсолнечным или кукурузным. Достаточно 1-2 ст. ложки такого масла в день (30 г).</p>
+        <p><strong>Жиры</strong> обладают высокой энергетической ценностью. Они более чем в 2 раза выше энергетической
+          ценности белков и углеводов, а значит, содержащие жир продукты являются наиболее калорийными.</p>
+        <p><em>Животные жиры</em> (насыщенные), высокое их потребление приводит к ожирению, сахарному диабету и
+          сердечно-сосудистым заболеваниям. Рекомендуется ограничение потребления жирного мяса, сливочного масла, а
+          также исключение мясоколбасных продуктов (сосиски, сардельки, колбасы, карбонаты и т.д.) и субпродуктов
+          (печень, язык и др.).</p>
+        <p><em>Растительные жиры</em> (ненасыщенные) поступают в организм вместе с маслами растительного происхождения —
+          оливковым, соевым, подсолнечным или кукурузным. Достаточно 1-2 ст. ложки такого масла в день (30 г).</p>
 
-        <span class="callout">ВАЖНО, что в повседневном рационе должно быть: <br />белков – 15 %, жиров – 30 %, углеводов – 55 %</span>
+        <span class="callout">ВАЖНО, что в повседневном рационе должно быть: <br />белков – 15 %, жиров – 30 %,
+          углеводов – 55 %</span>
       </div>
     </section>
 
@@ -214,18 +246,18 @@
     <section class="calc">
       <h2>Калькулятор норм БЖУ</h2>
       <small>Введите свои данные в поля (только числовые значения)</small>
-      <form>
+      <form id="bju-form">
 
         <div class="radio-group">
           <label><input type="radio" name="sex" value="male" checked /> мужской</label>
           <label><input type="radio" name="sex" value="female" /> женский</label>
         </div>
 
-        <label>Ваш вес
+        <label>Ваш вес (кг)
           <input type="number" name="weight" min="1" placeholder="введите значение" required />
         </label>
 
-        <label>Ваш рост
+        <label>Ваш рост (см)
           <input type="number" name="height" min="1" placeholder="введите значение" required />
         </label>
 
@@ -233,16 +265,27 @@
           <input type="number" name="age" min="1" placeholder="введите значение" required />
         </label>
 
-        <select name="activity" required>
-          <option value="" disabled selected>выберите из списка</option>
-          <option value="1.2">Минимальная активность</option>
-          <option value="1.375">Лёгкие тренировки (1-3 дня/нед)</option>
-          <option value="1.55">Умеренные тренировки (3-5 дней/нед)</option>
-          <option value="1.725">Тяжёлые тренировки (6-7 дней/нед)</option>
-          <option value="1.9">Очень тяжёлые тренировки / физ. работа</option>
-        </select>
+        <label>Уровень активности
+          <select name="activity" required>
+            <option value="" disabled selected>выберите из списка</option>
+            <option value="1.2">Минимальная активность</option>
+            <option value="1.375">Лёгкие тренировки (1-3 дня/нед)</option>
+            <option value="1.55">Умеренные тренировки (3-5 дней/нед)</option>
+            <option value="1.725">Тяжёлые тренировки (6-7 дней/нед)</option>
+            <option value="1.9">Очень тяжёлые тренировки / физ. работа</option>
+          </select>
+        </label>
         <button class="btn" type="submit">Посчитать</button>
       </form>
+
+      <div id="results" style="display:none;">
+        <h3>Ваши нормы БЖУ:</h3>
+        <p><strong>Индекс массы тела:</strong> <span id="bmi"></span> </p>
+        <p><strong>Калории:</strong> <span id="calories"></span> ккал</p>
+        <p><strong>Белки:</strong> <span id="proteins"></span> г</p>
+        <p><strong>Жиры:</strong> <span id="fats"></span> г</p>
+        <p><strong>Углеводы:</strong> <span id="carbs"></span> г</p>
+      </div>
     </section>
   </main>
 
@@ -255,7 +298,7 @@
     </div>
   </footer>
 
- 
+
   <script>
     const burger = document.getElementById('burger');
     const nav = document.getElementById('navigation');
@@ -264,5 +307,40 @@
       nav.classList.toggle('nav--open');
     });
   </script>
+
+
+  <script>
+    document.getElementById('bju-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+
+      const sex = document.querySelector('input[name="sex"]:checked').value;
+      const weight = parseFloat(document.querySelector('input[name="weight"]').value);
+      const height = parseFloat(document.querySelector('input[name="height"]').value);
+      const age = parseInt(document.querySelector('input[name="age"]').value);
+      const activity = parseFloat(document.querySelector('select[name="activity"]').value);
+
+      // базовый уровень метаболизма
+      let bmr;
+      if (sex === 'male') {
+        bmr = (10 * weight) + (6.25 * height) - (4.92 * age) + 5;
+      } else {
+        bmr = (10 * weight) + (6.25 * height) - (4.92 * age) - 161;
+      }
+
+      const bmi=weight/((height/100)*(height/100));
+      const calories = bmr * activity;
+      const proteins = calories * 0.15;
+      const fats = calories * 0.55;
+      const carbs = calories * 0.30;
+
+      document.getElementById('bmi').textContent = bmi.toFixed(1);
+      document.getElementById('calories').textContent = calories.toFixed(0);
+      document.getElementById('proteins').textContent = proteins.toFixed(0);
+      document.getElementById('fats').textContent = fats.toFixed(0);
+      document.getElementById('carbs').textContent = carbs.toFixed(0);
+      document.getElementById('results').style.display = 'block';
+    });
+  </script>
 </body>
+
 </html>
