@@ -104,6 +104,20 @@
       cursor: pointer;
     }
 
+    .habit__delete {
+      padding: 0.35rem 1.25rem;
+      border-radius: 999px;
+      background: #c7a8a8;
+      border: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .habit--completed {
+      opacity: 0.5;
+    }
+
 
     .streak {
       display: grid;
@@ -179,7 +193,7 @@
       <div class="modal__content">
         <span class="modal__close">&times;</span>
         <label>Привычка:
-          <input type="text" id="habit-name"  required>
+          <input type="text" id="habit-name" required>
         </label>
         <button class="btn" id="save-habit">Сохранить</button>
       </div>
@@ -187,7 +201,7 @@
     <h2 style="font-size:1.1rem; margin:0 0 1.5rem;">Мои привычки</h2>
 
     <div id="habit-list">
-        <!-- привычки -->
+      <!-- привычки -->
     </div>
 
     <section class="habit">
@@ -195,10 +209,12 @@
         <span class="chip chip--yellow">Сон не менее 8&nbsp;часов</span>
         <span class="habit__date">Сегодня: 13.05 | День первый</span>
         <button class="habit__status">Выполнил(а)!</button>
+        <button class="habit__delete">Удалить</button>
       </div>
       <div class="streak">
 
         <div class="dot dot--done"></div>
+        <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
@@ -236,6 +252,7 @@
         <span class="chip chip--teal">Утренняя гимнастика</span>
         <span class="habit__date">Сегодня: 13.05 | День десятый</span>
         <button class="habit__status">Выполнил(а)!</button>
+        <button class="habit__delete">Удалить</button>
       </div>
       <div class="streak">
 
@@ -252,6 +269,7 @@
 
         <div class="dot dot--done"></div>
 
+        <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
         <div class="dot"></div>
@@ -297,129 +315,157 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const createButton = document.querySelector('.btn-create');
-        const habitList = document.getElementById('habit-list');
-        const modal = document.getElementById('habit-modal');
-        const modalClose = document.querySelector('.modal__close');
-        const saveHabitButton = document.getElementById('save-habit');
-        const habitNameInput = document.getElementById('habit-name');
+      const createButton = document.querySelector('.btn-create');
+      const habitList = document.getElementById('habit-list');
+      const modal = document.getElementById('habit-modal');
+      const modalClose = document.querySelector('.modal__close');
+      const saveHabitButton = document.getElementById('save-habit');
+      const habitNameInput = document.getElementById('habit-name');
 
-        const localStorageKey = 'habits';
+      const localStorageKey = 'habits';
 
-        let habits = [];
-        function formatDate(date) {
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            return `${day}.${month}`;
+      let habits = [];
+      function formatDate(date) {
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        return `${day}.${month}`;
+      }
+
+      function saveHabitsToLocalStorage() {
+        localStorage.setItem(localStorageKey, JSON.stringify(habits));
+      }
+      function loadHabitsFromLocalStorage() {
+        const storedHabits = localStorage.getItem(localStorageKey);
+        if (storedHabits) {
+          habits = JSON.parse(storedHabits);
         }
+      }
 
-        function saveHabitsToLocalStorage() {
-            localStorage.setItem(localStorageKey, JSON.stringify(habits));
-        }
-        function loadHabitsFromLocalStorage() {
-            const storedHabits = localStorage.getItem(localStorageKey);
-            if (storedHabits) {
-                habits = JSON.parse(storedHabits);
+      function renderHabits() {
+        habitList.innerHTML = '';
+        habits.forEach((habit, index) => {
+          const habitElement = document.createElement('section');
+          habitElement.classList.add('habit');
+          if (habit.isCompleted) {
+            habitElement.classList.add('habit--completed');
+          }
+          const habitHead = document.createElement('div');
+          habitHead.classList.add('habit__head');
+
+          const chip = document.createElement('span');
+          chip.classList.add('chip', 'chip--yellow');
+          chip.textContent = habit.name;
+
+          const habitDate = document.createElement('span');
+          habitDate.classList.add('habit__date');
+          habitDate.textContent = 'Сегодня: ' + formatDate(new Date()) + ' | День 0';
+          const habitStatusButton = document.createElement('button');
+          habitStatusButton.classList.add('habit__status');
+          habitStatusButton.textContent = 'Выполнил(а)!';
+          habitStatusButton.addEventListener('click', () => {
+            habit.isCompleted = !habit.isCompleted;
+            if (habit.isCompleted) {
+              habitElement.classList.add('habit--completed');
+            } else {
+              habitElement.classList.remove('habit--completed');
             }
-        }
+            saveHabitsToLocalStorage();
+          });
 
-        function renderHabits() {
-            habitList.innerHTML = '';
-            habits.forEach((habit, index) => {
-                const habitElement = document.createElement('section');
-                habitElement.classList.add('habit');
 
-                const habitHead = document.createElement('div');
-                habitHead.classList.add('habit__head');
+          const deleteHabitButton = document.createElement('button');
+          deleteHabitButton.classList.add('habit__delete');
+          deleteHabitButton.textContent = 'Удалить';
+          deleteHabitButton.addEventListener('click', () => {
+            // Удаляем привычку из массива
+            habits.splice(index, 1);
+            saveHabitsToLocalStorage();
+            renderHabits();
+          });
 
-                const chip = document.createElement('span');
-                chip.classList.add('chip', 'chip--yellow');
-                chip.textContent = habit.name;
 
-                const habitDate = document.createElement('span');
-                habitDate.classList.add('habit__date');
-                habitDate.textContent = 'Сегодня: ' + formatDate(new Date()) + ' | День 0'; 
-                const habitStatusButton = document.createElement('button');
-                habitStatusButton.classList.add('habit__status');
-                habitStatusButton.textContent = 'Выполнил(а)!';
-                habitStatusButton.addEventListener('click', () => {
-                   
-                });
+          habitHead.appendChild(chip);
+          habitHead.appendChild(habitDate);
+          habitHead.appendChild(habitStatusButton);
+          habitHead.appendChild(deleteHabitButton);
 
-                habitHead.appendChild(chip);
-                habitHead.appendChild(habitDate);
-                habitHead.appendChild(habitStatusButton);
+          const streak = document.createElement('div');
+          streak.classList.add('streak');
 
-                const streak = document.createElement('div');
-                streak.classList.add('streak');
+          // точки для отслеживания прогресса
+          for (let i = 0; i < 31; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            dot.dataset.completed = habit.progress && habit.progress[i] ? 'true' : 'false';
 
-                // точки для отслеживания прогресса
-                for (let i = 0; i < 30; i++) {
-                    const dot = document.createElement('div');
-                    dot.classList.add('dot');
-                    dot.dataset.completed = habit.progress && habit.progress[i] ? 'true' : 'false';
+            if (dot.dataset.completed === 'true') {
+              dot.classList.add('dot--done');
+            }
 
-                    if (dot.dataset.completed === 'true') {
-                        dot.classList.add('dot--done');
-                    }
+            // Если привычка выполнена, блокируем нажатие на дни
+            if (habit.isCompleted) {
+              dot.style.pointerEvents = 'none';
+            } else {
+              dot.style.pointerEvents = 'auto';
+            }
 
-                    dot.addEventListener('click', () => {
-                        habit.progress = habit.progress || Array(30).fill(false); 
-                        habit.progress[i] = !habit.progress[i]; 
+            dot.addEventListener('click', () => {
+              habit.progress = habit.progress || Array(31).fill(false);
+              habit.progress[i] = !habit.progress[i];
 
-                        dot.dataset.completed = habit.progress[i] ? 'true' : 'false';
-                        if (dot.dataset.completed === 'true') {
-                            dot.classList.add('dot--done');
-                        } else {
-                            dot.classList.remove('dot--done');
-                        }
+              dot.dataset.completed = habit.progress[i] ? 'true' : 'false';
+              if (dot.dataset.completed === 'true') {
+                dot.classList.add('dot--done');
+              } else {
+                dot.classList.remove('dot--done');
+              }
 
-                        saveHabitsToLocalStorage(); // Сохраняем в localStorage
-                    });
-
-                    streak.appendChild(dot);
-                }
-
-                habitElement.appendChild(habitHead);
-                habitElement.appendChild(streak);
-
-                habitList.appendChild(habitElement);
+              saveHabitsToLocalStorage(); // Сохраняем в localStorage
             });
+
+            streak.appendChild(dot);
+          }
+
+          habitElement.appendChild(habitHead);
+          habitElement.appendChild(streak);
+
+          habitList.appendChild(habitElement);
+        });
+      }
+
+
+
+      // Открытие модального окна
+      createButton.addEventListener('click', () => {
+        modal.style.display = 'block';
+      });
+
+      // Закрытие модального окна
+      modalClose.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      // Сохранение привычки
+      saveHabitButton.addEventListener('click', () => {
+        const habitName = habitNameInput.value.trim();
+        if (habitName !== '') {
+          habits.push({ name: habitName, progress: Array(31).fill(false) });
+          habitNameInput.value = '';
+          modal.style.display = 'none';
+          saveHabitsToLocalStorage();
+          renderHabits();
         }
+      });
 
+      // Закрытие модального окна при клике вне его
+      window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
 
-
-        // Открытие модального окна
-        createButton.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-
-        // Закрытие модального окна
-        modalClose.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // Сохранение привычки
-        saveHabitButton.addEventListener('click', () => {
-            const habitName = habitNameInput.value.trim();
-            if (habitName !== '') {
-                habits.push({ name: habitName, progress: Array(30).fill(false) }); 
-                habitNameInput.value = ''; 
-                modal.style.display = 'none';
-                saveHabitsToLocalStorage();
-                renderHabits(); 
-            }
-        });
-
-        // Закрытие модального окна при клике вне его
-        window.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        loadHabitsFromLocalStorage();
-        renderHabits();
+      loadHabitsFromLocalStorage();
+      renderHabits();
     });
   </script>
 </body>
