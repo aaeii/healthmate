@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack — Трекер привычек</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main.css" />
+
+
+  <style>
+    .page-title {
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 2rem 0 2.5rem;
+      position: relative;
+    }
+    .page-title::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      margin-left: 1rem;
+      width: 80%;
+      height: 2px;
+      background: #000;
+      transform: translateY(-50%);
+    } 
+    .btn-create {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.75rem;
+      font-size: 0.9rem;
+      background: #c7a382;
+      border: none;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 2.5rem;
+    }
+    .btn-create span {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      font-size: 1rem;
+      line-height: 20px;
+      text-align: center;
+    }
+
+
+    .habit {
+      margin-bottom: 3rem;
+    }
+    .habit__head {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+    .chip {
+      display: inline-block;
+      padding: 0.35rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #000;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .chip--yellow { background:#e7cc6a; }
+    .chip--teal { background:#5da89e; color:#fff; }
+
+    .habit__date {
+      font-size: 0.85rem;
+      color: #333;
+      flex: 1;
+    }
+    .habit__status {
+      padding: 0.35rem 1.25rem;
+      border-radius: 999px;
+      background: #c7c2a8;
+      border: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+
+    .streak {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
+      gap: 0.4rem;
+      max-width: 680px;
+    }
+    .dot {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #000;
+      border-radius: 50%;
+    }
+    .dot--done { background:#5e7a45; border-color:#5e7a45; }
+    .dot--miss { background:#c55a5a; border-color:#c55a5a; }
+
+
+    @media (max-width: 480px) {
+      .page-title { font-size: 1.5rem; }
+      .streak { grid-template-columns: repeat(auto-fill, minmax(24px, 1fr)); }
+      .dot { width: 24px; height:24px; border-width:2px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">FitTrack</a>
+
+      <nav class="nav" id="navigation">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="nutrition.html">Питание</a>
+        <a class="nav__link active" href="habits.html">Трекер&nbsp;привычек</a>
+        <a class="nav__link" href="tips.html">Полезные советы</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">Формируем привычки</h1>
+
+
+    <button class="btn-create">
+      СОЗДАТЬ ПРИВЫЧКУ <span>+</span>
+    </button>
+
+    <h2 style="font-size:1.1rem; margin:0 0 1.5rem;">Мои привычки</h2>
+
+
+    <section class="habit">
+      <div class="habit__head">
+        <span class="chip chip--yellow">Сон не менее 8&nbsp;часов</span>
+        <span class="habit__date">Сегодня: 13.05 | День первый</span>
+        <button class="habit__status">Выполнил(а)!</button>
+      </div>
+      <div class="streak">
+
+        <div class="dot dot--done"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </section>
+
+    <section class="habit">
+      <div class="habit__head">
+        <span class="chip chip--teal">Утренняя гимнастика</span>
+        <span class="habit__date">Сегодня: 13.05 | День десятый</span>
+        <button class="habit__status">Выполнил(а)!</button>
+      </div>
+      <div class="streak">
+
+        <div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div><div class="dot dot--done"></div>
+
+        <div class="dot dot--miss"></div>
+
+        <div class="dot dot--done"></div>
+
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Связаться с нами:</span>
+      <a href="mailto:fittrack@gmail.com">fittrack@gmail.com</a>
+      <a href="tel:+79999999999">+7 999 99 99 999</a>
+    </div>
+  </footer>
+
+
+  <script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('navigation');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('burger--active');
+      nav.classList.toggle('nav--open');
+    });
+  </script>
+</body>
+</html>
