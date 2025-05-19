@@ -159,6 +159,79 @@
         border-width: 2px;
       }
     }
+
+    /* Стили для модального окна */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+
+    .modal__close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Затемнение фона */
+    .modal-open {
+      overflow: hidden;
+    }
+
+    .modal-open::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Затемняющий фон */
+      z-index: 999;
+      /* Под модальным окном */
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Затемнение фона */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .modal-overlay--active {
+      opacity: 1;
+    }
+
+
+    .modal-content {
+      width: 543px;
+      height: 343px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #8B9C78;
+      padding: 20px;
+      border-radius: 65px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -190,12 +263,16 @@
 
     </section>
     <div class="modal" id="habit-modal">
-      <div class="modal__content">
+      <div class="modal-content">
+        <h4>Новая привычка</h4>
         <span class="modal__close">&times;</span>
-        <label>Привычка:
-          <input type="text" id="habit-name" required>
+        <label>Название привычки:
+          <input type="text" id="habit-name" placeholder="введите название" required>
         </label>
-        <button class="btn" id="save-habit">Сохранить</button>
+        <label>Количество дней:
+          <input type="number" id="habit-days" placeholder="введите количество" required>
+        </label>
+        <button id="save-habit">Сохранить</button>
       </div>
     </div>
     <h2 style="font-size:1.1rem; margin:0 0 1.5rem;">Мои привычки</h2>
@@ -314,13 +391,19 @@
   </script>
 
   <script>
+
+
     document.addEventListener('DOMContentLoaded', function () {
+      const createHabitButton = document.querySelector('.btn-create');
       const createButton = document.querySelector('.btn-create');
       const habitList = document.getElementById('habit-list');
       const modal = document.getElementById('habit-modal');
       const modalClose = document.querySelector('.modal__close');
       const saveHabitButton = document.getElementById('save-habit');
       const habitNameInput = document.getElementById('habit-name');
+      const habitDaysInput = document.getElementById('habit-days');
+      // const habitModal = document.getElementById('habit-modal');
+
 
       const localStorageKey = 'habits';
 
@@ -388,11 +471,13 @@
           const streak = document.createElement('div');
           streak.classList.add('streak');
 
-          habit.progress = habit.progress || Array(31).fill(false);
-          habit.missed = habit.missed || Array(31).fill(false);
+          // habit.progress = habit.progress || Array(31).fill(false);
+          // habit.missed = habit.missed || Array(31).fill(false);
+          habit.progress = habit.progress || Array(habit.progress.length).fill(false);
+          habit.missed = habit.missed || Array(habit.progress.length).fill(false);
 
           // точки для отслеживания прогресса
-          for (let i = 0; i < 31; i++) {
+          for (let i = 0; i < habit.progress.length; i++) {
             const dot = document.createElement('div');
             dot.classList.add('dot');
             dot.dataset.index = i;
@@ -401,6 +486,7 @@
             if (habit.progress[i]) {
               dot.classList.add('dot--done');
               dot.classList.remove('dot--missed');
+              // showSuccessModal();
             } else if (habit.missed[i]) {
               dot.classList.add('dot--missed');
               dot.classList.remove('dot--done');
@@ -415,7 +501,7 @@
             }
 
             dot.addEventListener('click', () => {
-              habit.progress = habit.progress || Array(31).fill(false);
+              habit.progress = habit.progress || Array(habit.progress.length).fill(false);
               habit.progress[i] = !habit.progress[i];
 
               dot.dataset.completed = habit.progress[i] ? 'true' : 'false';
@@ -424,6 +510,7 @@
                 dot.classList.add('dot--done');
                 dot.classList.remove('dot--missed');
                 habit.missed[i] = false;
+                showSuccessModal();
               } else {
                 dot.classList.remove('dot--done');
                 habit.missed[i] = false;
@@ -439,6 +526,23 @@
           habitElement.appendChild(streak);
           habitList.appendChild(habitElement);
         });
+      }
+      function showSuccessModal() {
+        // Создаем элементы модального окна
+        const modalOverlay = document.createElement('div');
+        modalOverlay.classList.add('modal-overlay');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content');
+        modalContent.innerHTML = `<h4>Ты молодец. Так держать!</h4>`;
+
+        modalOverlay.appendChild(modalContent);
+        document.body.appendChild(modalOverlay);
+        modalOverlay.classList.add('modal-overlay--active');
+        setTimeout(() => {
+          modalOverlay.classList.remove('modal-overlay--active');
+          modalOverlay.remove();
+        }, 1000);
       }
 
 
@@ -466,7 +570,7 @@
         for (let j = 0; j < n; j++) {
           habit.missed[j] = false;
         }
-        
+
         const firstTrueIndex = trueIndices[0];
         for (let i = 0; i < firstTrueIndex; i++) {
           if (!progress[i]) {
@@ -504,19 +608,33 @@
       // Закрытие модального окна
       modalClose.addEventListener('click', () => {
         modal.style.display = 'none';
+
       });
 
       // Сохранение привычки
       saveHabitButton.addEventListener('click', () => {
         const habitName = habitNameInput.value.trim();
-        if (habitName !== '') {
-          habits.push({ name: habitName, progress: Array(31).fill(false) });
+        const habitDays = parseInt(habitDaysInput.value, 10);
+        if (habitName !== '' && !isNaN(habitDays) && habitDays > 0) {
+          addHabit(habitName, habitDays);
+          habits.push({ name: habitName, progress: Array(habit.progress.length).fill(false) });
           habitNameInput.value = '';
+          habitDaysInput.value = '';
           modal.style.display = 'none';
           saveHabitsToLocalStorage();
           renderHabits();
         }
       });
+      function addHabit(habitName, days) {
+        const newHabit = {
+          name: habitName,
+          progress: Array(days).fill(false), // Используем введенное количество дней
+          missed: Array(days).fill(false)
+        };
+        habits.push(newHabit);
+        saveHabitsToLocalStorage();
+        renderHabits();
+      }
 
       // Закрытие модального окна при клике вне его
       window.addEventListener('click', (event) => {
