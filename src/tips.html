@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,6 +16,7 @@
       margin: 2rem 0 2.5rem;
       position: relative;
     }
+
     .page-title::after {
       content: "";
       position: absolute;
@@ -26,116 +28,58 @@
       transform: translateY(-50%);
     }
 
- 
-    .btn-create {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.6rem 1.75rem;
-      font-size: 0.9rem;
-      background: #c7a382;
-      border: none;
-      border-radius: 999px;
-      color: #fff;
-      font-weight: 500;
-      cursor: pointer;
-      margin-bottom: 2.5rem;
-    }
-    .btn-create span {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      font-size: 1rem;
-      line-height: 20px;
-      text-align: center;
-    }
 
-
-    .habit {
-      margin-bottom: 3rem;
-    }
-    .habit__head {
+    .cards-container {
       display: flex;
-      align-items: center;
-      gap: 1.25rem;
       flex-wrap: wrap;
-      margin-bottom: 1.25rem;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
     }
-    .chip {
-      display: inline-block;
-      padding: 0.35rem 1rem;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: #000;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-    .chip--yellow { background:#e7cc6a; }
-    .chip--teal { background:#5da89e; color:#fff; }
-
-    .habit__date {
-      font-size: 0.85rem;
-      color: #333;
-      flex: 1;
-    }
-    .habit__status {
-      padding: 0.35rem 1.25rem;
-      border-radius: 999px;
-      background: #c7c2a8;
-      border: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-
-
-    .streak {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(32px, 1fr));
-      gap: 0.4rem;
-      max-width: 680px;
-    }
-    .dot {
-      width: 32px;
-      height: 32px;
-      border: 3px solid #000;
-      border-radius: 50%;
-    }
-    .dot--done { background:#5e7a45; border-color:#5e7a45; }
-    .dot--miss { background:#c55a5a; border-color:#c55a5a; }
-
 
     .card {
       width: 300px;
-      height: 180px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      background-color: #ffffff;
-      font-family: Arial, sans-serif;
-      margin: 20px;
+      padding: 15px;
+      background-color: #78895a;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .card h3 {
-      margin-top: 0;
-      font-size: 20px;
+      margin: 0 0 10px;
+      color: #e3e3e3;
     }
 
     .card p {
-      color: #555;
+      margin: 0;
+      color: #d9d9d9;
     }
 
-    @media (max-width: 480px) {
-      .page-title { font-size: 1.5rem; }
-      .streak { grid-template-columns: repeat(auto-fill, minmax(24px, 1fr)); }
-      .dot { width: 24px; height:24px; border-width:2px; }
+    .card .category {
+      font-size: 14px;
+      color: #363636;
+      margin-bottom: 8px;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: none; /* скрываем, если нет изображения */
     }
   </style>
 </head>
+
 <body>
+
+  <!-- Компонент -->
+  <template id="card-template">
+    <div class="card">
+      <h3>Заголовок</h3>
+      <p>Контент карточки</p>
+    </div>
+  </template>
 
   <header class="header">
     <div class="container header__inner">
@@ -144,8 +88,8 @@
       <nav class="nav" id="navigation">
         <a class="nav__link" href="index.html">Главная</a>
         <a class="nav__link" href="nutrition.html">Питание</a>
-        <a class="nav__link active" href="habits.html">Трекер&nbsp;привычек</a>
-        <a class="nav__link" href="tips.html">Полезные советы</a>
+        <a class="nav__link" href="habits.html">Трекер&nbsp;привычек</a>
+        <a class="nav__link active" href="tips.html">Полезные советы</a>
       </nav>
 
       <button class="burger" id="burger" aria-label="Открыть меню">
@@ -157,13 +101,43 @@
   <main class="container">
 
     <h1 class="page-title">Полезные советы</h1>
-    <h2>Здоровье</h2>
-    <div class="card">
-      <h3>Заголовок карточки</h3>
-      <p>Это пример простой прямоугольной карточки. Вы можете изменить размеры, цвета и содержимое по своему желанию.</p>
-    </div>
-    <h2>Питание</h2>
-    <h2>Активность</h2>
+  
+    <template id="tip-template">
+      <div class="card">
+        <img src="" alt="Фото совета">
+        <div class="category"></div>
+        <h3></h3>
+        <p></p>
+      </div>
+    </template>
+  
+    <div class="cards-container" id="cards"></div>
+
+    <script>
+      const template = document.getElementById('tip-template');
+      const container = document.getElementById('cards');
+
+      fetch('tips.json')
+        .then(response => response.json())
+        .then(tips => {
+          tips.forEach(tip => {
+            const clone = template.content.cloneNode(true);
+            const img = clone.querySelector('img');
+
+            if (tip.img) {
+              img.src = tip.img;
+              img.style.display = 'block';
+            }
+            clone.querySelector('h3').textContent = tip.title;
+            clone.querySelector('p').textContent = tip.body;
+
+            container.appendChild(clone);
+          });
+        })
+        .catch(error => {
+          console.error('Ошибка при загрузке данных:', error);
+        });
+    </script>
   </main>
 
 
@@ -182,7 +156,8 @@
     burger.addEventListener('click', () => {
       burger.classList.toggle('burger--active');
       nav.classList.toggle('nav--open');
-    });
+    });   
   </script>
 </body>
+
 </html>
