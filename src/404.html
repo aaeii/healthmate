@@ -1,57 +1,207 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Страница не найдена</title>
-  <style>
-    body {
-      font-family: Inter, sans-serif;
-      background-color: #f6f6f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      text-align: center;
-      color: #333;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страница не найдена</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    .error-container {
-      max-width: 500px;
-    }
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    h1 {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    p {
-      font-size: 1.25rem;
-      margin-bottom: 2rem;
-    }
+        header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: flex-start;
+            z-index: 10;
+        }
 
-    a {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background-color: #78895a;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: 500;
-      transition: background-color 0.3s;
-    }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeInDown 0.8s forwards;
+        }
 
-    a:hover {
-      background-color: #5e6e47;
-    }
-  </style>
+        nav a:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        nav a:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        nav a:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        nav a:nth-child(4) {
+            animation-delay: 5s;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 50px;
+            padding: 0 5%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .text-block {
+            background-color: rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 50px;
+            max-width: 600;
+            backdrop-filter: blur(10px);
+            transform: translateX(-30px);
+            opacity: 0;
+            animation: slideInLeft 1s forwards 1s;
+        }
+
+        .text-block h1 {
+            color: #9897977c;
+            font-size: 10rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .text-block p {
+            color: #ffffffb2;
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .text-block a {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #78895a;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .text-block a:hover {
+            background-color: #5e6e47;
+        }
+
+        .image-block img {
+            max-width: 500px;
+            border-radius: 20px;
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards 1s; 
+        }
+
+        @keyframes slideInLeft {
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .text-block {
+                transform: translateY(50px);
+                animation: slideInUp 1s forwards 1s;
+            }
+
+            .image-block {
+                margin-top: 30px;
+            }
+
+            .image-block img {
+                max-width: 80%;
+            }
+
+            @keyframes slideInUp {
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        }
+
+        .logo {
+            color: #ffffff;
+            margin-right: 2rem;
+            font-family: 'Italiana', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-decoration: none;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="error-container">
-    <h1>404</h1>
-    <p>Упс! Такой страницы не существует.</p>
-    <a href="index.html">На главную</a>
-  </div>
+
+    <header>
+        <a href="index.html" class="logo">FitTrack</a>
+        <nav class="nav" id="navigation">
+            <a class="nav__link" href="index.html">Главная</a>
+            <a class="nav__link" href="nutrition.html">Питание</a>
+            <a class="nav__link" href="habits.html">Трекер привычек</a>
+            <a class="nav__link" href="tips.html">Полезные советы</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="text-block">
+            <h1>404</h1>
+            <p>Ой! Мы не нашли эту страницу.<br>
+                Возможно, она переехала... или ушла на пробежку🏃<br>
+                Не переживайте — вы всегда можете вернуться на главную.</p>
+            <a href="index.html">На главную</a>
+        </div>
+        <div class="image-block">
+            <img src="/assets/404/404.png" alt="Страница не найдена">
+        </div>
+    </div>
+
 </body>
+
 </html>
