@@ -12,22 +12,22 @@
   <style>
     .page-title {
       font-size: 1.75rem;
-      font-weight: 600;
+      font-weight: 400;
       margin: 2rem 0 2.5rem;
       position: relative;
+      display: flex;
+      align-items: center;
     }
 
     .page-title::after {
       content: "";
-      position: absolute;
-      top: 50%;
-      left: calc(100% + 1rem);
-      width: 100%;
-      height: 2px;
-      background: #000;
-      transform: translateY(-50%);
+      flex-grow: 1;
+      height: 0.5px;
+      background-color: #000;
+      margin-left: 20px;
+      align-self: center;
+      box-shadow: 0px 4px 4px 0px #00000040;
     }
-
 
     .btn-create {
       display: inline-flex;
@@ -35,8 +35,8 @@
       gap: 0.5rem;
       padding: 0.6rem 1.75rem;
       font-size: 0.9rem;
-      background: #c7a382;
-      border: none;
+      background: var(--beige);
+      border: 0.5px solid #000;
       border-radius: 999px;
       color: #fff;
       font-weight: 500;
@@ -60,6 +60,8 @@
       margin-bottom: 3rem;
     }
 
+
+
     .habit__head {
       display: flex;
       align-items: center;
@@ -68,50 +70,66 @@
       margin-bottom: 1.25rem;
     }
 
+
+    .habit__date {
+      font-size: 0.85rem;
+      color: #000;
+      flex: 1;
+
+      display: flex;
+      align-items: center;
+    }
+
+    .habit__date::after {
+      content: "";
+      flex-grow: 1;
+      height: 0.5px;
+      background-color: #000;
+      margin-left: 20px;
+      align-self: center;
+    }
+
+
     .chip {
       display: inline-block;
       padding: 0.35rem 1rem;
       border-radius: 999px;
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 400;
       color: #000;
       text-transform: uppercase;
       white-space: nowrap;
     }
 
     .chip--yellow {
-      background: #e7cc6a;
+      background: var(--header-y);
     }
 
     .chip--teal {
-      background: #5da89e;
-      color: #fff;
+      background: var(--header-b);
     }
 
-    .habit__date {
-      font-size: 0.85rem;
-      color: #333;
-      flex: 1;
-    }
 
     .habit__status {
       padding: 0.35rem 1.25rem;
       border-radius: 999px;
-      background: #c7c2a8;
+      background: var(--done);
       border: none;
       font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
+      border: 1px solid #000;
     }
 
     .habit__delete {
       padding: 0.35rem 1.25rem;
       border-radius: 999px;
-      background: #c7a8a8;
+      background: var(--delete);
       border: none;
       font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
+      border: 1px solid #000;
     }
 
     .habit--completed {
@@ -129,18 +147,16 @@
     .dot {
       width: 32px;
       height: 32px;
-      border: 3px solid #000;
+      border: 2px solid #000;
       border-radius: 50%;
     }
 
     .dot--done {
-      background: #5e7a45;
-      border-color: #5e7a45;
+      background: var(--success);
     }
 
     .dot--missed {
-      background: #c55a5a;
-      border-color: #c55a5a;
+      background: var(--fail);
     }
 
 
@@ -170,17 +186,17 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 1000;
+      color: #fff;
     }
 
     .modal__close {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 30px;
       font-size: 20px;
       cursor: pointer;
     }
 
-    /* Затемнение фона */
     .modal-open {
       overflow: hidden;
     }
@@ -193,9 +209,7 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      /* Затемняющий фон */
       z-index: 999;
-      /* Под модальным окном */
     }
 
     .modal-overlay {
@@ -205,19 +219,23 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0, 0, 0, 0.5);
-      /* Затемнение фона */
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 1000;
       opacity: 0;
       transition: opacity 0.3s ease-in-out;
+      color: #fff;
     }
 
     .modal-overlay--active {
       opacity: 1;
     }
 
+    .modal-overlay h4 {
+      font-size: 30px;
+      font-weight: 100;
+    }
 
     .modal-content {
       width: 543px;
@@ -226,11 +244,55 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: #8B9C78;
-      padding: 20px;
+      background-color: var(--green);
+      padding: 10px 50px 0px 50px;
       border-radius: 65px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-      text-align: center;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 25px;
+    }
+
+    .modal-content label {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: #fff;
+      font-weight: 400;
+      font-size: 1rem;
+    }
+
+
+    .modal-content input[type="text"],
+    .modal-content input[type="number"] {
+      width: 100%;
+      padding: 0rem 0.8rem;
+      border: none;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      background: var(--grey);
+      color: var(--beige);
+      font-weight: 400;
+      height: 30px;
+    }
+
+    .modal-content input::placeholder {
+      color: var(--beige);
+    }
+
+    .modal-content button#save-habit {
+      padding: 10px 15px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 15px;
+      border: 1px solid #000;
+      cursor: pointer;
+      background-color: var(--beige);
+      color: #fff;
     }
   </style>
 </head>
@@ -260,11 +322,11 @@
       <button class="btn-create">
         СОЗДАТЬ ПРИВЫЧКУ <span>+</span>
       </button>
-
     </section>
+
     <div class="modal" id="habit-modal">
       <div class="modal-content">
-        <h4>Новая привычка</h4>
+        <h4>НОВАЯ ПРИВЫЧКА</h4>
         <span class="modal__close">&times;</span>
         <label>Название привычки:
           <input type="text" id="habit-name" placeholder="введите название" required>
@@ -272,10 +334,10 @@
         <label>Количество дней:
           <input type="number" id="habit-days" placeholder="введите количество" required>
         </label>
-        <button id="save-habit">Сохранить</button>
+        <button id="save-habit">СОХРАНИТЬ</button>
       </div>
     </div>
-    <h2 style="font-size:1.1rem; margin:0 0 1.5rem;">Мои привычки</h2>
+    <h2 style="font-size:1.1rem; margin:0 0 1.5rem; font-weight: 200;">Мои привычки</h2>
 
     <div id="habit-list">
       <!-- привычки -->
@@ -285,8 +347,8 @@
       <div class="habit__head">
         <span class="chip chip--yellow">Сон не менее 8&nbsp;часов</span>
         <span class="habit__date">Сегодня: 13.05 | День первый</span>
-        <button class="habit__status">Выполнил(а)!</button>
-        <button class="habit__delete">Удалить</button>
+        <button class="habit__status">ВЫПОЛНИЛ(А)!</button>
+        <button class="habit__delete">УДАЛИТЬ</button>
       </div>
       <div class="streak">
 
@@ -328,8 +390,8 @@
       <div class="habit__head">
         <span class="chip chip--teal">Утренняя гимнастика</span>
         <span class="habit__date">Сегодня: 13.05 | День десятый</span>
-        <button class="habit__status">Выполнил(а)!</button>
-        <button class="habit__delete">Удалить</button>
+        <button class="habit__status">ВЫПОЛНИЛ(А)!</button>
+        <button class="habit__delete">УДАЛИТЬ</button>
       </div>
       <div class="streak">
 
@@ -369,6 +431,7 @@
         <div class="dot"></div>
       </div>
     </section>
+
   </main>
 
 
@@ -441,10 +504,22 @@
 
           const habitDate = document.createElement('span');
           habitDate.classList.add('habit__date');
-          habitDate.textContent = 'Сегодня: ' + formatDate(new Date()) + ' | День 0';
+          let lastCountedIndex = -1;
+          if (habit.progress && habit.progress.length > 0 && habit.missed && habit.missed.length === habit.progress.length) {
+            for (let i = 0; i < habit.progress.length; i++) {
+              if (habit.progress[i] === true || habit.missed[i] === true) {
+                lastCountedIndex = i;
+              } else {
+                break;
+              }
+            }
+          }
+          const currentDayNumber = lastCountedIndex + 1;
+          habitDate.textContent = 'Сегодня: ' + formatDate(new Date()) + ' | День ' + currentDayNumber;
+
           const habitStatusButton = document.createElement('button');
           habitStatusButton.classList.add('habit__status');
-          habitStatusButton.textContent = 'Выполнил(а)!';
+          habitStatusButton.textContent = 'ВЫПОЛНИЛ(А)!';
           habitStatusButton.addEventListener('click', () => {
             habit.isCompleted = !habit.isCompleted;
             if (habit.isCompleted) {
@@ -458,7 +533,7 @@
 
           const deleteHabitButton = document.createElement('button');
           deleteHabitButton.classList.add('habit__delete');
-          deleteHabitButton.textContent = 'Удалить';
+          deleteHabitButton.textContent = 'УДАЛИТЬ';
           deleteHabitButton.addEventListener('click', () => {
             habits.splice(index, 1);
             saveHabitsToLocalStorage();
@@ -471,8 +546,6 @@
           const streak = document.createElement('div');
           streak.classList.add('streak');
 
-          // habit.progress = habit.progress || Array(31).fill(false);
-          // habit.missed = habit.missed || Array(31).fill(false);
           habit.progress = habit.progress || Array(habit.progress.length).fill(false);
           habit.missed = habit.missed || Array(habit.progress.length).fill(false);
 
@@ -534,7 +607,8 @@
 
         const modalContent = document.createElement('div');
         modalContent.classList.add('modal-content');
-        modalContent.innerHTML = `<h4>Ты молодец. Так держать!</h4>`;
+        modalContent.innerHTML = `<h4>Ты молодец. Так держать!</h4>
+        <img src="img/icons8-сердце-100 (1).png"/>`;
 
         modalOverlay.appendChild(modalContent);
         document.body.appendChild(modalOverlay);
