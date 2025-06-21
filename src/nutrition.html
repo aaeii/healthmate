@@ -4,28 +4,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FitTrack — Питание</title>
+  <title>HealthMade — Питание</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css" />
 
 
-  <style>
-    .page-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      margin: 2rem 0 2.5rem;
-      position: relative;
-    }
 
-    .page-title::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      margin-left: 1rem;
-      width: 80%;
-      height: 2px;
-      background: #000;
-      transform: translateY(-50%);
+  <style>
+    :root {
+      --success: #788A62;
+      --fail: #DA6363;
+      --done: #C5D0B7;
+      --delete: #d0b7b7;
+      --green: #8B9C78;
+      --beige: #BBA189;
+      --dark-beige: #C0A68D;
+      --header-y: #EDCB8E;
+      --header-b: #8DC0BD;
+      --grey: #D9D9D9;
     }
 
     .plate {
@@ -69,11 +66,12 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      background: #c7c2a8;
+      /* background: #c7c2a8; */
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 600;
+      font-weight: 400;
+      font-size: 18px;
     }
 
     .nutri-step__body h3 {
@@ -90,21 +88,19 @@
 
     .callout {
       display: inline-block;
-      background: #bfa37e;
+      background: var(--dark-beige);
       color: #fff;
       padding: 0.75rem 1.25rem;
       border-radius: 999px;
       font-size: 0.9rem;
-      margin: 1rem 0 3rem;
+      margin: 1rem auto;
     }
 
 
     .calc {
-      /* background: var(--green); */
       color: #fff;
-      padding: 2rem 1.5rem 2.5rem;
-      border-radius: 1rem;
-      max-width: 700px;
+      padding: 3rem 3rem;
+      border-radius: 65px;
       margin: 0 auto;
     }
 
@@ -117,7 +113,7 @@
 
     .calc small {
       display: block;
-      font-size: 0.75rem;
+      font-size: 20px;
       font-family: Inter;
       font-weight: 400;
       word-wrap: break-word
@@ -127,8 +123,9 @@
       /* display: flex;
       flex-direction: column;
       gap: 1rem; */
-      background: var(--green);
+      background-color: var(--success);
       color: var(--grey);
+
     }
 
     .calc label {
@@ -148,6 +145,7 @@
       color: var(--beige);
       font-weight: 400;
       height: 25px;
+      margin-bottom: 5px;
     }
 
     .calc input::placeholder {
@@ -167,11 +165,12 @@
 
     .calc .btn {
       align-self: center;
-      background: #c7a382;
-      border-color: transparent;
+      background-color: var(--dark-beige);
+      border-color: var(--dark-beige);
       color: #fff;
       font-weight: 500;
-      border: 0.5px solid #000;
+      border: 0.5px #000;
+      width: 200px;
     }
 
 
@@ -199,20 +198,23 @@
       overflow: auto;
       background-color: rgba(0, 0, 0, 0.4);
       color: #fff;
+      
     }
 
 
     .modal-content {
-      width: 543px;
-      height: 343px;
+      width: 700px;
+      height: 400px;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: var(--green);
-      padding: 20px;
+      background-color: var(--success);
       border-radius: 65px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      padding: 20px 60px;
+      font-weight: 100px;
+      font-size: 20px;
     }
 
     .modal__close {
@@ -245,6 +247,11 @@
       background-color: #000;
       margin-left: 10px;
     }
+    em{
+      color: #788A62;
+      font-style: normal;
+    }
+    
   </style>
 </head>
 
@@ -252,7 +259,7 @@
 
   <header class="header">
     <div class="container header__inner">
-      <a href="index.html" class="logo">FitTrack</a>
+      <a href="index.html" class="logo">HealthMade</a>
 
       <nav class="nav" id="navigation">
         <a class="nav__link " href="index.html">Главная</a>
@@ -275,38 +282,37 @@
     </div>
 
     <section class="nutri-step">
-      <div class="nutri-step__num">1</div>
+      <div class="nutri-step__num" style="background-color: #C0A68D;">1</div>
       <div class="nutri-step__body">
-        <h3>Белки</h3>
-        <p><strong>Белки</strong> — это важнейшие компоненты пищи. Белки растительного и животного происхождения должны
+        <p><strong>БЕЛКИ</strong> — это важнейшие компоненты пищи. Белки растительного и животного происхождения должны
           присутствовать в пищe в равных пропорциях, приблизительно 30–40 % одних и столько же других.</p>
-        <p><em>Животные белки</em> (мясо, рыба, творог, яйца, сыр) содержат в своём составе около 20 % чистого белка.
+        <p><em>Животные белки (мясо, рыба, творог, яйца, сыр)</em> содержат в своём составе около 20 % чистого белка.
           Суточная норма таких продуктов должна составлять до 150-200 г. Красное мясо (баранину, говядину, свинину) не
           рекомендуют употреблять чаще двух раз в неделю, лучше заменить его курицей, индейкой (без кожи), а ещё лучше —
           рыбой.</p>
-        <p><em>Растительные белки</em> (продукты переработки зерна, крупы, бобовые, грибы, семена подсолнечника и тыквы
-          и орехи). В день съедать 1 порцию этих продуктов: можно приготовить самостоятельное блюдо или же добавить их в
+          
+        <p><em>Растительные белки (продукты переработки зерна, крупы, бобовые, грибы, семена подсолнечника и тыквы
+          и орехи).</em> В день съедать 1 порцию этих продуктов: можно приготовить самостоятельное блюдо или же добавить их в
           любое другое (салат, омлет, овощной гарнир, суп и др.).</p>
+          
       </div>
     </section>
 
     <section class="nutri-step">
-      <div class="nutri-step__num">2</div>
+      <div class="nutri-step__num" style="background-color: #C5D0B7;">2</div>
       <div class="nutri-step__body">
-        <h3>Углеводы</h3>
-        <p><strong>Углеводы</strong> — снабжают организм человека энергией. Подразделяются белки на простые и сложные.
+        <p><strong>УГЛЕВОДЫ</strong> — снабжают организм человека энергией. Подразделяются белки на простые и сложные.
           Их требуется нашему организму больше всего, так как они служат основным источником энергии.</p>
-        <p>Простые углеводы (сахар, сладости и напитки на его основе), требуется не более 50 г в сутки.</p>
-        <p>Сложные углеводы присутствуют в крахмалосодержащих продуктах (хлеб, каши, макаронные изделия, а также овощи и
-          фрукты). Здоровому человеку углеводов нужно потреблять — 350 г в сутки.</p>
+        <p><em>Простые углеводы (сахар, сладости и напитки на его основе),</em> требуется не более 50 г в сутки.</p>
+        <p><em>Сложные углеводы присутствуют в крахмалосодержащих продуктах (хлеб, каши, макаронные изделия, а также овощи и
+          фрукты).</em> Здоровому человеку углеводов нужно потреблять — 350 г в сутки.</p>
       </div>
     </section>
 
     <section class="nutri-step">
-      <div class="nutri-step__num">3</div>
+      <div class="nutri-step__num" style="background-color:var(--header-y);">3</div>
       <div class="nutri-step__body">
-        <h3>Жиры</h3>
-        <p><strong>Жиры</strong> обладают высокой энергетической ценностью. Они более чем в 2 раза выше энергетической
+        <p><strong>ЖИРЫ</strong> обладают высокой энергетической ценностью. Они более чем в 2 раза выше энергетической
           ценности белков и углеводов, а значит, содержащие жир продукты являются наиболее калорийными.</p>
         <p><em>Животные жиры</em> (насыщенные), высокое их потребление приводит к ожирению, сахарному диабету и
           сердечно-сосудистым заболеваниям. Рекомендуется ограничение потребления жирного мяса, сливочного масла, а
@@ -315,14 +321,16 @@
         <p><em>Растительные жиры</em> (ненасыщенные) поступают в организм вместе с маслами растительного происхождения —
           оливковым, соевым, подсолнечным или кукурузным. Достаточно 1-2 ст. ложки такого масла в день (30 г).</p>
 
-        <span class="callout">ВАЖНО, что в повседневном рационе должно быть: <br />белков – 15 %, жиров – 30 %,
-          углеводов – 55 %</span>
+        <div style="display: grid;place-items: center; margin-top: 20px;">
+          <span class="callout">ВАЖНО, что в повседневном рационе должно быть: </span>
+          <span>белков – 15 %, жиров – 30 %,
+          углеводов – 55 %</span></div>
       </div>
     </section>
 
 
     <section class="calc">
-      <h2 class="header-line">
+      <h2 class="page-title">
         Калькулятор норм КБЖУ
       </h2>
       <form id="bju-form" class="calc form">
@@ -350,7 +358,7 @@
           <input type="number" name="age" min="1" placeholder="введите значение" required />
         </label>
 
-        <label>Уровень активности
+        <label>Для точной нормы калорий вам необходимо определить коэффициент физической активности
           <select name="activity" required class="activity">
             <option value="" disabled selected>выберите из списка</option>
             <option value="1.2">Минимальная активность</option>
@@ -360,7 +368,9 @@
             <option value="1.9">Очень тяжёлые тренировки / физ. работа</option>
           </select>
         </label>
-        <button class="btn" type="submit">Посчитать</button>
+        <div style="display: grid;place-items: center;">
+          <button class="btn" type="submit">ПОСЧИТАТЬ</button>
+        </div>
       </form>
     </section>
     </div>
@@ -368,12 +378,13 @@
       <div class="modal-content">
         <span class="modal__close">&times;</span>
         <div id="results" style="display:none;">
-          <h3>ВАШИ НОРМЫ:</h3>
-          <p><strong>Индекс массы тела:</strong> <span id="bmi"></span> </p>
-          <p><strong>Калории:</strong> <span id="calories"></span> ккал</p>
-          <p><strong>Белки:</strong> <span id="proteins"></span> г</p>
-          <p><strong>Жиры:</strong> <span id="fats"></span> г</p>
-          <p><strong>Углеводы:</strong> <span id="carbs"></span> г</p>
+          <div style="display: grid;place-items: center; margin: 10px 0px;">
+          <p>ВАШИ НОРМЫ:</p></div>
+          <p>Индекс массы тела: <span id="bmi"></span> </p>
+          <p>Калории: <span id="calories"></span> ккал</p>
+          <p>Белки: <span id="proteins"></span> г</p>
+          <p>Жиры: <span id="fats"></span> г</p>
+          <p>Углеводы: <span id="carbs"></span> г</p>
         </div>
       </div>
     </div>
@@ -383,7 +394,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <span>Связаться с нами:</span>
-      <a href="mailto:fittrack@gmail.com">fittrack@gmail.com</a>
+      <a href="mailto:HEALTHMADE@gmail.com">HEALTHMADE@gmail.com</a>
       <a href="tel:+79999999999">+7 999 99 99 999</a>
     </div>
   </footer>
