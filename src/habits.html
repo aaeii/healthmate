@@ -56,7 +56,6 @@
       font-size: 0.85rem;
       color: #000;
       flex: 1;
-
       display: flex;
       align-items: center;
     }
@@ -138,23 +137,6 @@
 
     .dot--missed {
       background: var(--fail);
-    }
-
-
-    @media (max-width: 480px) {
-      .page-title {
-        font-size: 1.5rem;
-      }
-
-      .streak {
-        grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
-      }
-
-      .dot {
-        width: 24px;
-        height: 24px;
-        border-width: 2px;
-      }
     }
 
     /* Стили для модального окна */
@@ -274,6 +256,38 @@
       cursor: pointer;
       background-color: var(--beige);
       color: #fff;
+    }
+
+    @media (max-width: 480px) {
+      .streak {
+        grid-template-columns: repeat(auto-fill, minmax(24px, 1fr));
+      }
+
+      .dot {
+        width: 24px;
+        height: 24px;
+        border-width: 1px;
+      }
+
+      .habit__date {
+        font-size: 11px;
+        color: #000;
+      }
+
+      .habit__status,
+      .habit__delete {
+        height: 25px;
+        font-size: 11px;
+      }
+
+      .modal-content {
+        width: 300px;
+        height: 300px;
+        gap: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
     }
   </style>
 </head>

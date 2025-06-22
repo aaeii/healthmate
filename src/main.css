@@ -358,11 +358,33 @@ img {
     font-size: 1.5rem;
   }
 
+  .hero__title {
+    top: 135px;
+    left: 80px;
+    font-size: 18px;
+  }
+
 }
 
 @media (max-width: 480px) {
   .hero__title {
-    font-size: 1.25rem;
+    font-size: 1rem;
     max-width: 220px;
   }
+
+  .hero__img {
+    width: 100%;
+    border-radius: 40px;
+    object-fit: cover;
+  }
+
+  .page-title {
+    font-size: 24px;
+    font-weight: 400;
+  }
+
+  .page-title::after {
+    height: 0px;
+  }
+
 }
