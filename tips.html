@@ -24,7 +24,7 @@
       padding: 15px;
       background-color: #78895a;
       border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .card h3 {
@@ -48,14 +48,14 @@
       height: auto;
       border-radius: 10px;
       margin-bottom: 10px;
-      display: none; /* скрываем, если нет изображения */
+      display: none;
+      /* скрываем, если нет изображения */
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Компонент -->
   <template id="card-template">
     <div class="card">
       <h3>Заголовок</h3>
@@ -83,7 +83,7 @@
   <main class="container">
 
     <h1 class="page-title">Полезные советы</h1>
-  
+
     <template id="tip-template">
       <div class="card">
         <img src="" alt="Фото совета">
@@ -92,7 +92,7 @@
         <p></p>
       </div>
     </template>
-  
+
     <div class="cards-container" id="cards"></div>
 
     <script>
