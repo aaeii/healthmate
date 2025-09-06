@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthMade — Трекер привычек</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Italiana&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/main.css" />
+
+
+  <style>
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      width: 300px;
+      padding: 15px;
+      background-color: #78895a;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #e3e3e3;
+    }
+
+    .card p {
+      margin: 0;
+      color: #d9d9d9;
+    }
+
+    .card .category {
+      font-size: 14px;
+      color: #363636;
+      margin-bottom: 8px;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      display: none; /* скрываем, если нет изображения */
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Компонент -->
+  <template id="card-template">
+    <div class="card">
+      <h3>Заголовок</h3>
+      <p>Контент карточки</p>
+    </div>
+  </template>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="index.html" class="logo">HealthMade</a>
+
+      <nav class="nav" id="navigation">
+        <a class="nav__link" href="index.html">Главная</a>
+        <a class="nav__link" href="nutrition.html">Питание</a>
+        <a class="nav__link" href="habits.html">Трекер&nbsp;привычек</a>
+        <a class="nav__link active" href="tips.html">Полезные советы</a>
+      </nav>
+
+      <button class="burger" id="burger" aria-label="Открыть меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <h1 class="page-title">Полезные советы</h1>
+  
+    <template id="tip-template">
+      <div class="card">
+        <img src="" alt="Фото совета">
+        <div class="category"></div>
+        <h3></h3>
+        <p></p>
+      </div>
+    </template>
+  
+    <div class="cards-container" id="cards"></div>
+
+    <script>
+      const template = document.getElementById('tip-template');
+      const container = document.getElementById('cards');
+
+      fetch('data/tips.json')
+        .then(response => response.json())
+        .then(tips => {
+          tips.forEach(tip => {
+            const clone = template.content.cloneNode(true);
+            const img = clone.querySelector('img');
+
+            if (tip.img) {
+              img.src = tip.img;
+              img.style.display = 'block';
+            }
+            clone.querySelector('h3').textContent = tip.title;
+            clone.querySelector('p').textContent = tip.body;
+
+            container.appendChild(clone);
+          });
+        })
+        .catch(error => {
+          console.error('Ошибка при загрузке данных:', error);
+        });
+    </script>
+  </main>
+
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <span>Связаться с нами:</span>
+      <a href="mailto:HEALTHMADE@gmail.com">HEALTHMADE@gmail.com</a>
+      <a href="tel:+79999999999">+7 999 99 99 999</a>
+    </div>
+  </footer>
+
+
+  <script>
+    const burger = document.getElementById('burger');
+    const nav = document.getElementById('navigation');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('burger--active');
+      nav.classList.toggle('nav--open');
+    });   
+  </script>
+</body>
+
+</html>
